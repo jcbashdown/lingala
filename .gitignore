@@ -43,3 +43,4 @@ android/keystores/debug.keystore
 #vim
 *.swp
 *.swj
+*my-release-key.keystore
