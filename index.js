@@ -1,9 +1,7 @@
 import lingalaData from './lingala-english_data.js';
 
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
+ * lingala flashcards app 
  */
 
 import React, { Component } from 'react';
@@ -16,7 +14,7 @@ import {
 } from 'react-native';
 import Dimensions from 'Dimensions'
 
-const chooseRandomFour = function(lingalaData) {
+const chooseRandomFour = (lingalaData) => {
   var results = {testSubject: {}, randomFour: []};
   var keys = Object.keys(lingalaData);
   for(i = 0; i < 4; i++) {
