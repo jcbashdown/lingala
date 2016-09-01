@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 import INITIAL_STATE from '../INITIAL_STATE.js'
 
 const actions = require('../actions');
@@ -22,6 +24,36 @@ const chooseRandomN = (dictionary, n) => {
     arrayOfN.push(randIndex);
   }
   return arrayOfN;
+}
+
+const bumpCountsForWeek = (subject, change) => {
+  var currentWeekKey = moment().utc().startOf("week").format();
+  var previousWeekKey = moment().subtract(1, 'weeks').utc().startOf("week").format();
+  if(change > 0) {
+    if(subject[currentWeekKey]) {
+      if(subject[currentWeekKey][lastCorrect]) { 
+        subject[currentWeekKey][lastCorrect]++;
+      } else {
+        subject[currentWeekKey] = {
+          correctInRow: 1,
+          lastCorrect: true
+        }
+      }
+    } else {
+      delete(subject[previousWeekKey])
+      subject[currentWeekKey] = {
+        correctInRow: 1,
+        lastCorrect: true
+      }
+    }
+  } else {
+    delete(subject[previousWeekKey])
+    subject[currentWeekKey] = {
+      correctInRow: 0,
+      lastCorrect: false 
+    }
+  }
+  return subject;
 }
 
 function setState(state = INITIAL_STATE, action) {
@@ -50,10 +82,12 @@ function setState(state = INITIAL_STATE, action) {
       if(action.index === state.testSubject) {
         correctNumber++; 
         newSubject.correctNumber++; 
+        newSubject = bumpCountsForWeek(newSubject, 1)
         correct = true;
       } else {
         incorrectNumber++; 
         newSubject.incorrectNumber++; 
+        newSubject = bumpCountsForWeek(newSubject, -1)
         correct = false;
       }
       var newDictionary = Object.assign([], state.dictionary);
