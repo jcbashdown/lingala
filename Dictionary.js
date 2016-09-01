@@ -14,14 +14,11 @@ import {
 import Dimensions from 'Dimensions'
 
 import { connect } from 'react-redux'
-import { choose, changeCurrentTest } from './redux/actions'
 
-class TestAll extends Component {
+class Dictionary extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      choose: props.choose,
-      next: props.next,
       dictionary: props.dictionary,
       correctIndex: props.correctIndex,
       correct: props.correct,
@@ -64,13 +61,6 @@ class TestAll extends Component {
           renderRow={(rowData) => {
             if(this.state.correct === undefined) {
               return (<View style={this.getStyle(rowData)}>
-                <TouchableOpacity style={styles.touch} onPress={() => {this.state.choose(rowData)}}>
-                  <View>
-                    <Text>
-                      {this.state.dictionary[rowData]['lingala']}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
               </View>)
             } else {
               return (<View style={this.getStyle(rowData)}>
@@ -102,11 +92,6 @@ class TestAll extends Component {
           </View>
           <View style={styles.quarterWidth}></View>
           <View style={styles.quarterWidth}>
-            <TouchableOpacity onPress={this.state.next}>
-              <Text style={styles.topText}>
-                Next 
-              </Text>
-            </TouchableOpacity>
           </View>
         </View>
         <View style={styles.topHalf}>
@@ -138,22 +123,8 @@ const mapStateToProps = (state) => {
   };
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    next: () => {
-      dispatch(changeCurrentTest())
-    },
-    choose: (index) => {
-      dispatch(choose(index))
-    }
-  };
-}
-
-const VisibleTestAll = connect(
+const VisibleDictionary = connect(
   mapStateToProps,
-  mapDispatchToProps
-)(TestAll)
+)(Dictionary)
 
-//
-
-export default VisibleTestAll 
+export default VisibleDictionary
