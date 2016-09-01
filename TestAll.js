@@ -23,6 +23,7 @@ class TestAll extends Component {
     this.state = {
       choose: props.choose,
       next: props.next,
+      dictionary: props.dictionary,
       correctIndex: props.correctIndex,
       correct: props.correct,
       correctNumber: props.correctNumber,
@@ -32,6 +33,7 @@ class TestAll extends Component {
   }
   componentWillReceiveProps(nextProps) {
     this.setState({
+      dictionary: nextProps.dictionary,
       correctIndex: nextProps.correctIndex,
       correct: nextProps.correct,
       correctNumber: nextProps.correctNumber,
@@ -62,20 +64,20 @@ class TestAll extends Component {
           dataSource={dataSource}
           renderRow={(rowData) => {
             if(this.state.correct === undefined) {
-              return (<View style={this.getStyle(rowData.index)}>
-                <TouchableOpacity style={styles.touch} onPress={() => {this.state.choose(rowData.index)}}>
+              return (<View style={this.getStyle(rowData)}>
+                <TouchableOpacity style={styles.touch} onPress={() => {this.state.choose(rowData)}}>
                   <View>
                     <Text>
-                      {rowData['lingala']}
+                      {this.state.dictionary[rowData]['lingala']}
                     </Text>
                   </View>
                 </TouchableOpacity>
               </View>)
             } else {
-              return (<View style={this.getStyle(rowData.index)}>
+              return (<View style={this.getStyle(rowData)}>
                 <View>
                   <Text>
-                    {rowData['lingala']}
+                    {this.state.dictionary[rowData]['lingala']}
                   </Text>
                 </View>
               </View>)
@@ -110,7 +112,7 @@ class TestAll extends Component {
         </View>
         <View style={styles.topHalf}>
           <Text>
-            {this.state.currentTest.testSubject['english']}
+            {this.state.dictionary[this.state.currentTest.testSubject]['english']}
           </Text>
         </View>
         <View style={styles.bottomHalf}>
@@ -125,6 +127,7 @@ class TestAll extends Component {
 const mapStateToProps = (state) => {
   console.log(state)
   return {
+    dictionary: state.mainReducer.dictionary,
     correctNumber: state.mainReducer.correctNumber,
     incorrectNumber: state.mainReducer.incorrectNumber,
     correct: state.mainReducer.correct,
