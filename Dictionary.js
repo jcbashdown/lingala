@@ -5,9 +5,7 @@
 import styles from './styles'
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   Text,
-  TouchableOpacity,
   ListView,
   View
 } from 'react-native';
@@ -20,89 +18,32 @@ class Dictionary extends Component {
     super(props, context);
     this.state = {
       dictionary: props.dictionary,
-      correctIndex: props.correctIndex,
-      correct: props.correct,
-      correctNumber: props.correctNumber,
-      incorrectNumber: props.incorrectNumber,
-      currentTest: props.currentTest 
     }
   }
   componentWillReceiveProps(nextProps) {
     this.setState({
       dictionary: nextProps.dictionary,
-      correctIndex: nextProps.correctIndex,
-      correct: nextProps.correct,
-      correctNumber: nextProps.correctNumber,
-      incorrectNumber: nextProps.incorrectNumber,
-      currentTest: nextProps.currentTest 
     });
   }
-  getStyle(index) {
-    if(this.state.correct !== undefined) {
-      if(index === this.state.correctIndex) {
-        return styles.correctResponse;
-      } else {
-        return styles.incorrectResponse;
-      }
-    } else {
-      return styles.normalPossibleResponse;
-    }
-
-  }
-  getOptionsList(options) {
+  render() {
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    var dataSource = ds.cloneWithRows(options) 
+    var dataSource = ds.cloneWithRows(this.state.dictionary) 
     return (
-      <View style={styles.quarter}>
+      <View style={styles.dictionaryContainer}>
         <ListView
-          styles={styles.quarter}
-          horizontal={true}
+          style={styles.dictionary}
           dataSource={dataSource}
           renderRow={(rowData) => {
-            if(this.state.correct === undefined) {
-              return (<View style={this.getStyle(rowData)}>
-              </View>)
-            } else {
-              return (<View style={this.getStyle(rowData)}>
+              return (<View>
                 <View>
                   <Text>
-                    {this.state.dictionary[rowData]['lingala']}
+                    {rowData['lingala'] + ": " + rowData['english'] + ", correct:" + rowData['correctNumber'] + ", incorrect:" + rowData['incorrectNumber']}
                   </Text>
                 </View>
               </View>)
             }
-          }}
+          }
         />
-      </View>
-    )
-  }
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.topBar}>
-          <View style={styles.quarterWidth}>
-            <Text style={styles.topText}>
-              {"Correct: " + this.state.correctNumber}
-            </Text>
-          </View>
-          <View style={styles.quarterWidth}>
-            <Text style={styles.topText}>
-              {"Incorrect: " + this.state.incorrectNumber}
-            </Text>
-          </View>
-          <View style={styles.quarterWidth}></View>
-          <View style={styles.quarterWidth}>
-          </View>
-        </View>
-        <View style={styles.topHalf}>
-          <Text>
-            {this.state.dictionary[this.state.currentTest.testSubject]['english']}
-          </Text>
-        </View>
-        <View style={styles.bottomHalf}>
-          {this.getOptionsList(this.state.currentTest.randomFour.slice(0, 2))}
-          {this.getOptionsList(this.state.currentTest.randomFour.slice(2, 4))}
-        </View>
       </View>
     );
   }
@@ -112,14 +53,6 @@ const mapStateToProps = (state) => {
   console.log(state)
   return {
     dictionary: state.mainReducer.dictionary,
-    correctNumber: state.mainReducer.correctNumber,
-    incorrectNumber: state.mainReducer.incorrectNumber,
-    correct: state.mainReducer.correct,
-    correctIndex: state.mainReducer.correctIndex,
-    currentTest: {
-      "randomFour": state.mainReducer.randomFour,
-      "testSubject": state.mainReducer.testSubject
-    }
   };
 }
 

@@ -12,6 +12,11 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#F5FCFF',
   },
+  dictionaryContainer: {
+    marginTop: 50,
+    flex: 1,
+    backgroundColor: '#F5FCFF',
+  },
   topHalf: {
     height: (height / 2) - 100,
     flex: 1,
@@ -90,6 +95,9 @@ const styles = StyleSheet.create({
   tabBar: {
     backgroundColor: 'black',
     transform: [{translateY: -(height - 74)}]
+  },
+  dictionary: {
+    flex: 1
   }
 });
 
