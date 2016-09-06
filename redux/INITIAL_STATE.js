@@ -639,12 +639,16 @@ const dictionary = [
 ]
 
 const INITIAL_STATE = {
+  "testsFinished": 0,
+  "showCongratulationsButton": false,
+  "miniTest": false,
   "correctNumber": 0,
   "incorrectNumber": 0,
+  "numberLearned": 0,
   "dictionary": dictionary,
   "randomFour": [],
   "testSubject": undefined,
-  "currentTestSeries": [],
+  "currentTestSeries": dictionary.map((entryi, i) => {return i}),
   //has the correctNumber been chosen?,
   "correct": undefined,
   //if chosen, this is the correctNumber index

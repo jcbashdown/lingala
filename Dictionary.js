@@ -9,7 +9,6 @@ import {
   ListView,
   View
 } from 'react-native';
-import Dimensions from 'Dimensions'
 
 import { connect } from 'react-redux'
 
@@ -50,7 +49,6 @@ class Dictionary extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     dictionary: state.mainReducer.dictionary,
   };

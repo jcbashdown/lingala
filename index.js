@@ -9,6 +9,7 @@ import { Router, Scene } from 'react-native-router-flux';
 
 import TestAll from './TestAll';
 import Dictionary from './Dictionary';
+import MiniTest from './MiniTest';
 
 import { createStore } from 'redux'
 import { Provider, connect } from 'react-redux'
@@ -32,7 +33,6 @@ export default class lingala extends Component {
     return (
       <Provider store={store}>
         <RouterWithRedux>
-          <Scene key="root" hideNavBar={true}>
             <Scene key={"tabbar"} tabs={true} tabBarStyle={styles.tabBar}>
 
               <Scene key="TestAllTab"  title="Open ended test" icon={TabIcon} navigationBarStyle={{backgroundColor:'black', height: 0}} titleStyle={{color:'white'}}>
@@ -41,7 +41,10 @@ export default class lingala extends Component {
               <Scene key="DictionaryTab"  title="Dictionary" icon={TabIcon} navigationBarStyle={{backgroundColor:'black', height: 0}} titleStyle={{color:'white'}}>
                 <Scene key="Dictionary" component={Dictionary} title="Dictionary"/>
               </Scene>
-            </Scene>
+              <Scene key="MiniTestTab"  title="Mini Test" icon={TabIcon} navigationBarStyle={{backgroundColor:'black', height: 0}} titleStyle={{color:'white'}}>
+                <Scene key="MiniTest" component={MiniTest} title="Mini Test"/>
+              </Scene>
+              <Scene key="MiniTestActual" hideNavBar={true} component={TestAll} title="Mini Test"/>
           </Scene>
         </RouterWithRedux>
       </Provider>
