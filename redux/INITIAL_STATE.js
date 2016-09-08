@@ -1,5 +1,3 @@
-import allVerbs from "../verbsDictionary.js"
-
 const dictionary = [ 
   {"correctNumber": 0, "incorrectNumber": 0, "lingala": "ngai", "english": "me, mine"},
   {"correctNumber": 0, "incorrectNumber": 0, "lingala": "yo", "english": "you, yours"},
@@ -645,7 +643,7 @@ const dictionary = [
   {"correctNumber": 0, "incorrectNumber": 0, "lingala": "zomi", "english": "decade"},
   {"correctNumber": 0, "incorrectNumber": 0, "lingala": "zongo", "english": "toilet"},
   {"correctNumber": 0, "incorrectNumber": 0, "lingala": "zuwa", "english": "jealousy"}
-].concat(allVerbs);
+];
 
 //allows us to add new words more easily and still keep sorted
 const sortDictionary = (currentDictionary, sortBy) => {
