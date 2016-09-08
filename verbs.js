@@ -204,16 +204,16 @@ const generatedPresentVerbs = verbs.reduce((presentVerbs, item) => {
     return {
       "correctNumber": 0, 
       "incorrectNumber": 0, 
-      "lingala": pronoun.lingala + item.lingala.slice(2, -1) + "i (auto generated - may be incorrect)", 
-      "english": item.english + ", " + pronoun.english + " form, present"
+      "lingala": pronoun["lingala"] + item["lingala"].slice(2, -1) + "i (auto generated - may be incorrect)", 
+      "english": item["english"] + ", " + pronoun["english"] + " form, present"
     }
   });
   let negativePresentVerbs = pronouns.map((pronoun) => {
     return {
       "correctNumber": 0, 
       "incorrectNumber": 0, 
-      "lingala": pronoun.lingala + item.lingala.slice(2, -1) + "i te (auto generated - may be incorrect)", 
-      "english": item.english + ", " + pronoun.english + " form, present, negated form"
+      "lingala": pronoun["lingala"] + item["lingala"].slice(2, -1) + "i te (auto generated - may be incorrect)", 
+      "english": item["english"] + ", " + pronoun["english"] + " form, present, negated form"
     }
   });
   presentVerbs = presentVerbs.concat(positivePresentVerbs).concat(negativePresentVerbs);
@@ -225,16 +225,16 @@ const generatedPastVerbs = verbs.reduce((pastVerbs, item) => {
     return {
       "correctNumber": 0, 
       "incorrectNumber": 0, 
-      "lingala": pronoun.lingala + item.lingala.slice(2) + "ki (auto generated - may be incorrect)", 
-      "english": item.english + ", " + pronoun.english + " form, past"
+      "lingala": pronoun["lingala"] + item["lingala"].slice(2) + "ki (auto generated - may be incorrect)", 
+      "english": item["english"] + ", " + pronoun["english"] + " form, past"
     }
   });
   let negativePastVerbs = pronouns.map((pronoun) => {
     return {
       "correctNumber": 0, 
       "incorrectNumber": 0, 
-      "lingala": pronoun.lingala + item.lingala.slice(2) + "ki te (auto generated - may be incorrect)", 
-      "english": item.english + ", " + pronoun.english + " form, past, negated form"
+      "lingala": pronoun["lingala"] + item["lingala"].slice(2) + "ki te (auto generated - may be incorrect)", 
+      "english": item["english"] + ", " + pronoun["english"] + " form, past, negated form"
     }
   });
   pastVerbs = pastVerbs.concat(positivePastVerbs).concat(negativePastVerbs);
@@ -246,16 +246,16 @@ const generatedFutureVerbs = verbs.reduce((futureVerbs, item) => {
     return {
       "correctNumber": 0, 
       "incorrectNumber": 0, 
-      "lingala": pronoun.lingala + " " + item.lingala + " (auto generated - may be incorrect)", 
-      "english": item.english + ", " + pronoun.english + " form, future"
+      "lingala": pronoun["lingala"] + " " + item["lingala"] + " (auto generated - may be incorrect)", 
+      "english": item["english"] + ", " + pronoun["english"] + " form, future"
     }
   });
   let negativeFutureVerbs = pronouns.map((pronoun) => {
     return {
       "correctNumber": 0, 
       "incorrectNumber": 0, 
-      "lingala": pronoun.lingala + " " + item.lingala + " te (auto generated - may be incorrect)", 
-      "english": item.english + ", " + pronoun.english + " form, future, negated form"
+      "lingala": pronoun["lingala"] + " " + item["lingala"] + " te (auto generated - may be incorrect)", 
+      "english": item["english"] + ", " + pronoun["english"] + " form, future, negated form"
     }
   });
   futureVerbs = futureVerbs.concat(positiveFutureVerbs).concat(negativeFutureVerbs);
@@ -263,5 +263,14 @@ const generatedFutureVerbs = verbs.reduce((futureVerbs, item) => {
 }, [])
 
 const allVerbs = verbs.concat(generatedPresentVerbs).concat(generatedPastVerbs).concat(generatedFutureVerbs);
+
+var fs = require('fs');
+fs.writeFile("verbsDictionary.js", "module.exports = " + JSON.stringify(allVerbs), function(err) {
+    if(err) {
+        return console.log(err);
+    }
+
+    console.log("The file was saved!");
+}); 
 
 module.exports = allVerbs;

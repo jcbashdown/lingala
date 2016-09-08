@@ -1,5 +1,9 @@
 Credit to https://lobalingala.wordpress.com/ for the dictionary
 
+Notes:
+------
+To generate the verbs after any update run `node verbs.js`
+
 To run
 ======
 
