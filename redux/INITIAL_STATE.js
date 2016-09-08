@@ -1,4 +1,11 @@
 const dictionary = [ 
+  {"correctNumber": 0, "incorrectNumber": 0, "lingala": "ngai", "english": "me, mine"},
+  {"correctNumber": 0, "incorrectNumber": 0, "lingala": "yo", "english": "you, yours"},
+  {"correctNumber": 0, "incorrectNumber": 0, "lingala": "ye", "english": "him, her, his, hers"},
+  {"correctNumber": 0, "incorrectNumber": 0, "lingala": "biso", "english": "we, ours"},
+  {"correctNumber": 0, "incorrectNumber": 0, "lingala": "bino", "english": "you, yours"},
+  {"correctNumber": 0, "incorrectNumber": 0, "lingala": "bango", "english": "them, their"},
+
   {"correctNumber": 0, "incorrectNumber": 0, "lingala": "ananasi", "english": "pineapple"},
   {"correctNumber": 0, "incorrectNumber": 0, "lingala": "awa", "english": "here"},
   {"correctNumber": 0, "incorrectNumber": 0, "lingala": "ba", "english": "about"},
@@ -638,19 +645,26 @@ const dictionary = [
   {"correctNumber": 0, "incorrectNumber": 0, "lingala": "zuwa", "english": "jealousy"}
 ]
 
+//allows us to add new words more easily and still keep sorted
+const sortDictionary = (currentDictionary, sortBy) => {
+  return currentDictionary.concat().sort((a, b) => { return (a[sortBy].toUpperCase() > b[sortBy].toUpperCase() ) ? 1 : ( (a[sortBy].toUpperCase() < b[sortBy].toUpperCase()) ? -1 : 0 ) });
+}
+
+const sortedLingalaDictionary = sortDictionary(dictionary, "lingala");
+
 const INITIAL_STATE = {
   "currentDictionary": "lingala",
-  "englishDictionary": dictionary.concat().sort((a, b) => { return (a.english.toUpperCase() > b.english.toUpperCase() ) ? 1 : ( (a.english.toUpperCase() < b.english.toUpperCase()) ? -1 : 0 ) }),
+  "englishDictionary": sortDictionary(dictionary, "english"),
   "testsFinished": 0,
   "showCongratulationsButton": false,
   "miniTest": false,
   "correctNumber": 0,
   "incorrectNumber": 0,
   "numberLearned": 0,
-  "dictionary": dictionary,
+  "dictionary": sortedLingalaDictionary,
   "randomFour": [],
   "testSubject": undefined,
-  "currentTestSeries": dictionary.map((entryi, i) => {return i}),
+  "currentTestSeries": sortedLingalaDictionary.map((entry, i) => {return i}),
   //has the correctNumber been chosen?,
   "correct": undefined,
   //if chosen, this is the correctNumber index
