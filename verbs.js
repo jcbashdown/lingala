@@ -262,7 +262,7 @@ const generatedFutureVerbs = verbs.reduce((futureVerbs, item) => {
   return futureVerbs;
 }, [])
 
-const allVerbs = verbs.concat(generatedPresentVerbs).concat(generatedPastVerbs).concat(generatedFutureVerbs);
+const allVerbs = verbs;
 
 var fs = require('fs');
 fs.writeFile("verbsDictionary.js", "module.exports = " + JSON.stringify(allVerbs), function(err) {
