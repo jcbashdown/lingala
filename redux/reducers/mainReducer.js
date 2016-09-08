@@ -7,6 +7,7 @@ const actions = require('../actions');
 const CHANGE_CURRENT_TEST_SERIES = actions.CHANGE_CURRENT_TEST_SERIES
 const CHANGE_CURRENT_TEST = actions.CHANGE_CURRENT_TEST
 const CHOOSE = actions.CHOOSE
+const SWITCH_DICTIONARY = actions.SWITCH_DICTIONARY
 import { ActionConst } from 'react-native-router-flux';
 
 const TEST_POSSIBILITIES = 4;
@@ -76,14 +77,6 @@ const bumpCountsForWeek = (subject, change) => {
   return subject;
 }
 
-//this is fancy but unnecessary
-//const getCorrectsInRow = (state) => {
-  //return state.currentTestSeries.reduce((dictionaryIndex, number) => {
-    //if(state.dictionary[dictionaryIndex][getCurrentWeekKey()].correctInRow === REQUIRED_CORRECT_IN_ROW) {
-     //return number++;
-    //};
-  //}, 0)
-//}
 const getCorrectsInRow = (state, newlyCorrectItem) => {
   if(state.miniTest === false) {
     return 0;
@@ -167,6 +160,10 @@ function setState(state = INITIAL_STATE, action) {
         });        
       }
       return state
+    case SWITCH_DICTIONARY:
+      return Object.assign({}, state, {
+        currentDictionary: action.newDictionary 
+      }); 
     case ActionConst.JUMP:
       if(action.key === "MiniTestTab") {
         state = switchToMiniTest(state);

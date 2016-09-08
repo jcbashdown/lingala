@@ -639,6 +639,8 @@ const dictionary = [
 ]
 
 const INITIAL_STATE = {
+  "currentDictionary": "lingala",
+  "englishDictionary": dictionary.concat().sort((a, b) => { return (a.english.toUpperCase() > b.english.toUpperCase() ) ? 1 : ( (a.english.toUpperCase() < b.english.toUpperCase()) ? -1 : 0 ) }),
   "testsFinished": 0,
   "showCongratulationsButton": false,
   "miniTest": false,

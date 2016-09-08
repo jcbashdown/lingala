@@ -13,9 +13,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   dictionaryContainer: {
-    marginTop: 50,
     flex: 1,
     backgroundColor: '#F5FCFF',
+  },
+  dictionaryChoiceActive: {
+    width: width / 2,
+    alignSelf: 'stretch',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'gray'
+  },
+  dictionaryChoiceInactive: {
+    width: width / 2,
+    alignSelf: 'stretch',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   topHalf: {
     height: ((height - 124) / 2),
@@ -99,6 +113,8 @@ const styles = StyleSheet.create({
     paddingLeft: 15
   },
   topText: {
+    textAlignVertical: 'center',
+    justifyContent: 'center',
     color: 'white'
   },
   touch: {
